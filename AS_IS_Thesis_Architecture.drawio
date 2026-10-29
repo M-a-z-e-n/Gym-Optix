@@ -1,0 +1,211 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" modified="2026-10-29" agent="drawio-skill" version="24.0.0">
+  <diagram name="AS-IS High-Level Architecture (Spacious)" id="asis_spacious">
+    <mxGraphModel dx="2200" dy="1100" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="hdr_title" parent="1" style="shape=rectangle;rounded=1;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#1e293b;strokeWidth=1.8;align=center;" value="&lt;b style=&quot;font-size:19px;color:#0f172a;letter-spacing:0.5px;&quot;&gt;AS-IS System Architecture — High-Level Conceptual Overview&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size:12px;color:#475569;&quot;&gt;Real-Time Exercise Recognition and Repetition Counting System (Nicolas Ivan Cridlig Master's Thesis)&lt;/span&gt;" vertex="1">
+          <mxGeometry x="60" y="20" width="2080" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="t1_lane" parent="1" style="swimlane;startSize=30;horizontal=0;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#334155;strokeWidth=2;rounded=1;fontStyle=1;fontSize=12;fontColor=#0f172a;container=1;collapsible=0;pointerEvents=0;" value="&lt;b&gt;TIER 1: VIDEO INPUT SOURCES&lt;/b&gt;" vertex="1">
+          <mxGeometry x="60" y="105" width="280" height="635" as="geometry" />
+        </mxCell>
+        <mxCell id="in_rtsp" parent="t1_lane" style="shape=rectangle;rounded=1;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#0f172a;strokeWidth=1.8;align=center;fontSize=11;fontColor=#0f172a;" value="&lt;b&gt;RTSP IP Camera&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size:10px;color:#475569;&quot;&gt;• Fixed ceiling/wall gym surveillance&lt;br/&gt;• Monocular H.264 RTSP feed&lt;/span&gt;" vertex="1">
+          <mxGeometry x="30" y="70" width="220" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="in_webcam" parent="t1_lane" style="shape=rectangle;rounded=1;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#0f172a;strokeWidth=1.8;align=center;fontSize=11;fontColor=#0f172a;" value="&lt;b&gt;Browser Webcam&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size:10px;color:#475569;&quot;&gt;• Athlete personal user device&lt;br/&gt;• HTML5 getUserMedia live feed&lt;/span&gt;" vertex="1">
+          <mxGeometry x="30" y="240" width="220" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="in_file" parent="t1_lane" style="shape=rectangle;rounded=1;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#0f172a;strokeWidth=1.8;align=center;fontSize=11;fontColor=#0f172a;" value="&lt;b&gt;Recorded Video File&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size:10px;color:#475569;&quot;&gt;• Offline MP4 / AVI benchmarks&lt;br/&gt;• Repeatable research validation&lt;/span&gt;" vertex="1">
+          <mxGeometry x="30" y="410" width="220" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="t2_lane" parent="1" style="swimlane;startSize=30;horizontal=0;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#334155;strokeWidth=2;rounded=1;fontStyle=1;fontSize=12;fontColor=#0f172a;container=1;collapsible=0;pointerEvents=0;" value="&lt;b&gt;TIER 2: BACKEND &amp; STREAMING ENGINE (FastAPI)&lt;/b&gt;" vertex="1">
+          <mxGeometry x="430" y="105" width="360" height="635" as="geometry" />
+        </mxCell>
+        <mxCell id="be_factory" parent="t2_lane" style="shape=rectangle;rounded=1;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#0f172a;strokeWidth=1.8;align=center;fontSize=11;fontColor=#0f172a;" value="&lt;b&gt;Video Source Factory&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size:10px;color:#475569;&quot;&gt;Adapter Selection &amp; Ingestion Lifecycle&lt;/span&gt;" vertex="1">
+          <mxGeometry x="30" y="65" width="300" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="be_pipeline" parent="t2_lane" style="shape=rectangle;rounded=1;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#0f172a;strokeWidth=1.8;align=center;fontSize=11;fontColor=#0f172a;" value="&lt;b&gt;Frame Preprocessor &amp; Bounded Queues&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size:10px;color:#475569;&quot;&gt;Resize, BGR➔RGB, and Flow Backpressure Buffer&lt;/span&gt;" vertex="1">
+          <mxGeometry x="30" y="190" width="300" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="be_workers" parent="t2_lane" style="shape=rectangle;rounded=1;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#0f172a;strokeWidth=1.8;align=center;fontSize=11;fontColor=#0f172a;" value="&lt;b&gt;Asynchronous Worker Pool&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size:10px;color:#475569;&quot;&gt;Multi-threaded In-Process AI Task Dispatcher&lt;/span&gt;" vertex="1">
+          <mxGeometry x="30" y="315" width="300" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="be_gateway" parent="t2_lane" style="shape=rectangle;rounded=1;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#0f172a;strokeWidth=1.8;align=center;fontSize=11;fontColor=#0f172a;" value="&lt;b&gt;Communication Gateway&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size:10px;color:#475569;&quot;&gt;WebSocket Hub &amp; REST API Controller&lt;/span&gt;" vertex="1">
+          <mxGeometry x="30" y="440" width="300" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="t3_lane" parent="1" style="swimlane;startSize=30;horizontal=0;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#334155;strokeWidth=2;rounded=1;fontStyle=1;fontSize=12;fontColor=#0f172a;container=1;collapsible=0;pointerEvents=0;" value="&lt;b&gt;TIER 3: AI PROCESSING PIPELINE (In-Process Models)&lt;/b&gt;" vertex="1">
+          <mxGeometry x="880" y="105" width="390" height="635" as="geometry" />
+        </mxCell>
+        <mxCell id="ai_pose" parent="t3_lane" style="shape=rectangle;rounded=1;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#0f172a;strokeWidth=1.8;align=center;fontSize=11;fontColor=#0f172a;" value="&lt;b&gt;1. Pose Estimation (MediaPipe)&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size:10px;color:#475569;&quot;&gt;Extracts 33 3D Keypoints &amp; Bounding Box&lt;/span&gt;" vertex="1">
+          <mxGeometry x="30" y="65" width="330" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="ai_feat" parent="t3_lane" style="shape=rectangle;rounded=1;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#0f172a;strokeWidth=1.8;align=center;fontSize=11;fontColor=#0f172a;" value="&lt;b&gt;2. Feature Engineering&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size:10px;color:#475569;&quot;&gt;Computes 14 Joint Angles &amp; 14 Visibility Scores&lt;/span&gt;" vertex="1">
+          <mxGeometry x="30" y="185" width="330" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="ai_tcn" parent="t3_lane" style="shape=rectangle;rounded=1;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#0f172a;strokeWidth=1.8;align=center;fontSize=11;fontColor=#0f172a;" value="&lt;b&gt;3. Exercise Classification (TCN)&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size:10px;color:#475569;&quot;&gt;Temporal Convolutional Net (16 Exercise Categories)&lt;/span&gt;" vertex="1">
+          <mxGeometry x="30" y="305" width="330" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="ai_repnet" parent="t3_lane" style="shape=rectangle;rounded=1;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#475569;strokeWidth=1.8;strokeDashed=1;align=center;fontSize=11;fontColor=#0f172a;" value="&lt;b&gt;4. Repetition Counting (RepNet)&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size:10px;color:#475569;&quot;&gt;Temporal Self-Similarity Network &lt;i&gt;[Runs Asynchronously]&lt;/i&gt;&lt;/span&gt;" vertex="1">
+          <mxGeometry x="30" y="430" width="330" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="ai_note" parent="t3_lane" style="shape=rectangle;rounded=0;html=1;whiteSpace=wrap;fillColor=none;strokeColor=none;align=center;" value="&lt;i style=&quot;font-size:9.5px;color:#64748b;&quot;&gt;Note: In-process models avoid serialization overhead (not standalone microservices)&lt;/i&gt;" vertex="1">
+          <mxGeometry x="30" y="555" width="330" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="t4_lane" parent="1" style="swimlane;startSize=30;horizontal=0;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#334155;strokeWidth=2;rounded=1;fontStyle=1;fontSize=12;fontColor=#0f172a;container=1;collapsible=0;pointerEvents=0;" value="&lt;b&gt;TIER 4: STORAGE &amp; APPLICATION CLIENT&lt;/b&gt;" vertex="1">
+          <mxGeometry x="1360" y="105" width="440" height="635" as="geometry" />
+        </mxCell>
+        <mxCell id="db_box" parent="t4_lane" style="shape=rectangle;rounded=1;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#0f172a;strokeWidth=1.8;align=center;fontSize=11;fontColor=#0f172a;" value="&lt;b&gt;PostgreSQL Relational Database (Cloud SQL)&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size:10.5px;color:#475569;line-height:1.5;&quot;&gt;• &lt;b&gt;&lt;code&gt;exercise_plan&lt;/code&gt; Table:&lt;/b&gt; Workout routines, planned sets, reps&lt;br/&gt;• &lt;b&gt;&lt;code&gt;log&lt;/code&gt; Table:&lt;/b&gt; Completed workout records, detected IDs, timestamps&lt;/span&gt;" vertex="1">
+          <mxGeometry x="30" y="65" width="380" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="fe_box" parent="t4_lane" style="shape=rectangle;rounded=1;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#0f172a;strokeWidth=1.8;align=center;fontSize=11;fontColor=#0f172a;" value="&lt;b&gt;React 19 Frontend Client (Web SPA)&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size:10.5px;color:#475569;line-height:1.5;&quot;&gt;• Bootstrap 5 • React Router 7 • &lt;code&gt;useWebSocket.js&lt;/code&gt;&lt;br/&gt;• &lt;b&gt;Client Routes:&lt;/b&gt; &lt;code&gt;/&lt;/code&gt; (Main), &lt;code&gt;/user&lt;/code&gt;, &lt;code&gt;/admin&lt;/code&gt;, &lt;code&gt;/demo&lt;/code&gt;&lt;br/&gt;• &lt;b&gt;Features:&lt;/b&gt; Live Video Stream + Skeletal Pose Overlay,&lt;br/&gt;  Real-time Exercise Classification, Repetition Count Badge&lt;/span&gt;" vertex="1">
+          <mxGeometry x="30" y="265" width="380" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_lane" parent="1" style="swimlane;startSize=30;horizontal=0;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#334155;strokeWidth=2;rounded=1;fontStyle=1;fontSize=12;fontColor=#0f172a;container=1;collapsible=0;pointerEvents=0;" value="&lt;b&gt;DIAGRAM LEGEND &amp; DATAFLOW&lt;/b&gt;" vertex="1">
+          <mxGeometry x="1860" y="105" width="280" height="635" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_content" parent="legend_lane" style="shape=rectangle;rounded=1;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#cbd5e1;strokeWidth=1;align=left;spacingLeft=12;spacingTop=10;verticalAlign=top;fontSize=10;" value="&lt;b&gt;Arrow Semantics:&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;&lt;span style=&quot;font-size:10px;line-height:1.6;&quot;&gt;━━━▶ &lt;b&gt;Solid Line:&lt;/b&gt;&lt;br/&gt;Direct Runtime Data Flow&lt;br/&gt;&lt;br/&gt;┄ ┄ ┄▶ &lt;b&gt;Dashed Line:&lt;/b&gt;&lt;br/&gt;Asynchronous Decoupled Flow&lt;br/&gt;or Cloud Deployment Link&lt;br/&gt;&lt;br/&gt;⮂ ⮂ ⮂▶ &lt;b&gt;Dual Direction:&lt;/b&gt;&lt;br/&gt;Bidirectional Socket / REST Call&lt;/span&gt;&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Design Attributes:&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size:10px;color:#475569;line-height:1.5;&quot;&gt;• &lt;b&gt;Hollow Style:&lt;/b&gt; Clean, transparent academic presentation.&lt;br/&gt;• &lt;b&gt;Corridors:&lt;/b&gt; 90px spacing prevents line overlaps.&lt;br/&gt;• &lt;b&gt;Label Badges:&lt;/b&gt; Dataflow labels sit on white bordered badges for maximum legibility.&lt;/span&gt;" vertex="1">
+          <mxGeometry x="20" y="55" width="240" height="550" as="geometry" />
+        </mxCell>
+        <mxCell id="t5_lane" parent="1" style="swimlane;startSize=28;horizontal=0;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#475569;strokeWidth=2;strokeDashed=1;rounded=1;fontStyle=1;fontSize=12;fontColor=#0f172a;container=1;collapsible=0;pointerEvents=0;" value="&lt;b&gt;TIER 5: CLOUD DEPLOYMENT &amp; INFRASTRUCTURE (Google Cloud Platform &amp; IaC)&lt;/b&gt;" vertex="1">
+          <mxGeometry x="60" y="775" width="2080" height="265" as="geometry" />
+        </mxCell>
+        <mxCell id="inf_tf" parent="t5_lane" style="shape=rectangle;rounded=1;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#0f172a;strokeWidth=1.8;align=center;fontSize=11;fontColor=#0f172a;" value="&lt;b&gt;Terraform (IaC)&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size:10px;color:#475569;&quot;&gt;Declarative HCL Scripts&lt;br/&gt;Cloud Provisioning&lt;/span&gt;" vertex="1">
+          <mxGeometry x="40" y="80" width="230" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="inf_docker" parent="t5_lane" style="shape=rectangle;rounded=1;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#0f172a;strokeWidth=1.8;align=center;fontSize=11;fontColor=#0f172a;" value="&lt;b&gt;Docker Containers&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size:10px;color:#475569;&quot;&gt;Multi-stage Images for&lt;br/&gt;FastAPI &amp; React Frontend&lt;/span&gt;" vertex="1">
+          <mxGeometry x="330" y="80" width="250" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="inf_cr_be" parent="t5_lane" style="shape=rectangle;rounded=1;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#0f172a;strokeWidth=1.8;align=center;fontSize=11;fontColor=#0f172a;" value="&lt;b&gt;Cloud Run (Backend)&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size:10px;color:#475569;&quot;&gt;Serverless Container for&lt;br/&gt;FastAPI with WebSockets&lt;/span&gt;" vertex="1">
+          <mxGeometry x="660" y="80" width="290" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="inf_cr_fe" parent="t5_lane" style="shape=rectangle;rounded=1;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#0f172a;strokeWidth=1.8;align=center;fontSize=11;fontColor=#0f172a;" value="&lt;b&gt;Cloud Run (Frontend)&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size:10px;color:#475569;&quot;&gt;Serverless Static Hosting for&lt;br/&gt;React Single Page App&lt;/span&gt;" vertex="1">
+          <mxGeometry x="1020" y="80" width="290" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="inf_vpc" parent="t5_lane" style="shape=rectangle;rounded=1;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#0f172a;strokeWidth=1.8;align=center;fontSize=11;fontColor=#0f172a;" value="&lt;b&gt;Serverless VPC Connector&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size:10px;color:#475569;&quot;&gt;Private IP Internal Tunnel&lt;br/&gt;Subnet Interconnect&lt;/span&gt;" vertex="1">
+          <mxGeometry x="1380" y="80" width="290" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="inf_sql" parent="t5_lane" style="shape=rectangle;rounded=1;html=1;whiteSpace=wrap;fillColor=none;strokeColor=#0f172a;strokeWidth=1.8;align=center;fontSize=11;fontColor=#0f172a;" value="&lt;b&gt;Cloud SQL (PostgreSQL)&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size:10px;color:#475569;&quot;&gt;Fully Managed Private DB&lt;br/&gt;Isolated from Public Internet&lt;/span&gt;" vertex="1">
+          <mxGeometry x="1740" y="75" width="290" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="e_rtsp" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0f172a;strokeWidth=2;fontSize=10;fontColor=#0f172a;labelBackgroundColor=#ffffff;labelBorderColor=#94a3b8;spacing=3;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.4;entryDx=0;entryDy=0;" value="RTSP Video Stream" edge="1" source="in_rtsp" target="be_factory">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_webcam" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0f172a;strokeWidth=2;fontSize=10;fontColor=#0f172a;labelBackgroundColor=#ffffff;labelBorderColor=#94a3b8;spacing=3;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" value="Webcam Frames (Live)" edge="1" source="in_webcam" target="be_factory">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="365" y="392" />
+              <mxPoint x="365" y="215" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_file" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0f172a;strokeWidth=2;fontSize=10;fontColor=#0f172a;labelBackgroundColor=#ffffff;labelBorderColor=#94a3b8;spacing=3;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.6;entryDx=0;entryDy=0;" value="Offline Video Feed" edge="1" source="in_file" target="be_factory">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="395" y="562" />
+              <mxPoint x="395" y="215" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_fac_pipe" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0f172a;strokeWidth=2;fontSize=10;fontColor=#0f172a;labelBackgroundColor=#ffffff;labelBorderColor=#94a3b8;spacing=3;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" value="Selected Source Stream" edge="1" source="be_factory" target="be_pipeline">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_pipe_work" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0f172a;strokeWidth=2;fontSize=10;fontColor=#0f172a;labelBackgroundColor=#ffffff;labelBorderColor=#94a3b8;spacing=3;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" value="Buffered &amp; Normalized Frames" edge="1" source="be_pipeline" target="be_workers">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_work_pose" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0f172a;strokeWidth=2;fontSize=10;fontColor=#0f172a;labelBackgroundColor=#ffffff;labelBorderColor=#94a3b8;spacing=3;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" value="Live Frame Stream" edge="1" source="be_workers" target="ai_pose">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="815" y="460" />
+              <mxPoint x="815" y="212" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_work_repnet" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0f172a;strokeWidth=2;strokeDashed=1;fontSize=10;fontColor=#0f172a;labelBackgroundColor=#ffffff;labelBorderColor=#94a3b8;spacing=3;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" value="Raw Video Sub-sequences (Async)" edge="1" source="be_workers" target="ai_repnet">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="825" y="460" />
+              <mxPoint x="825" y="582" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_pose_feat" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0f172a;strokeWidth=2;fontSize=10;fontColor=#0f172a;labelBackgroundColor=#ffffff;labelBorderColor=#94a3b8;spacing=3;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" value="33 Body Landmarks &amp; Bounding Box" edge="1" source="ai_pose" target="ai_feat">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_feat_tcn" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0f172a;strokeWidth=2;fontSize=10;fontColor=#0f172a;labelBackgroundColor=#ffffff;labelBorderColor=#94a3b8;spacing=3;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" value="14 Joint Angles + 14 Visibility Scores" edge="1" source="ai_feat" target="ai_tcn">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_tcn_gw" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0f172a;strokeWidth=2;fontSize=10;fontColor=#0f172a;labelBackgroundColor=#ffffff;labelBorderColor=#94a3b8;spacing=3;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.2;entryDx=0;entryDy=0;" value="16-Category Class Probabilities" edge="1" source="ai_tcn" target="be_gateway">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="855" y="460" />
+              <mxPoint x="855" y="565" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_repnet_gw" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0f172a;strokeWidth=2;fontSize=10;fontColor=#0f172a;labelBackgroundColor=#ffffff;labelBorderColor=#94a3b8;spacing=3;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.4;entryDx=0;entryDy=0;" value="Asynchronous Repetition Counts" edge="1" source="ai_repnet" target="be_gateway">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="845" y="582" />
+              <mxPoint x="845" y="580" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_gw_db" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0f172a;strokeWidth=2;fontSize=10;fontColor=#0f172a;labelBackgroundColor=#ffffff;labelBorderColor=#94a3b8;spacing=3;exitX=1;exitY=0.6;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" value="SQL Queries (Exercise Plans &amp; Set Logs)" edge="1" source="be_gateway" target="db_box">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="790" y="595" />
+              <mxPoint x="805" y="595" />
+              <mxPoint x="805" y="750" />
+              <mxPoint x="1315" y="750" />
+              <mxPoint x="1315" y="245" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_gw_fe_ws" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0f172a;strokeWidth=2;fontSize=10;fontColor=#0f172a;labelBackgroundColor=#ffffff;labelBorderColor=#94a3b8;spacing=3;exitX=1;exitY=0.8;exitDx=0;exitDy=0;entryX=0;entryY=0.6;entryDx=0;entryDy=0;" value="WebSocket (Live Stream &amp; Predictions)" edge="1" source="be_gateway" target="fe_box">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="790" y="610" />
+              <mxPoint x="800" y="610" />
+              <mxPoint x="800" y="760" />
+              <mxPoint x="1335" y="760" />
+              <mxPoint x="1335" y="495" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_gw_fe_rest" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#0f172a;strokeWidth=2;fontSize=10;fontColor=#0f172a;labelBackgroundColor=#ffffff;labelBorderColor=#94a3b8;spacing=3;exitX=1;exitY=0.95;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" value="REST API (CRUD Plans, Workout History)" edge="1" source="be_gateway" target="fe_box">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="790" y="625" />
+              <mxPoint x="795" y="625" />
+              <mxPoint x="795" y="770" />
+              <mxPoint x="1350" y="770" />
+              <mxPoint x="1350" y="430" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_tf_prov" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=1.8;strokeDashed=1;fontSize=10;fontColor=#475569;labelBackgroundColor=#ffffff;labelBorderColor=#cbd5e1;spacing=3;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" value="Provisions GCP Infrastructure" edge="1" source="inf_tf" target="inf_docker">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_dkr_run" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=1.8;strokeDashed=1;fontSize=10;fontColor=#475569;labelBackgroundColor=#ffffff;labelBorderColor=#cbd5e1;spacing=3;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" value="Deploys Backend Image" edge="1" source="inf_docker" target="inf_cr_be">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_cr_fe" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=1.8;strokeDashed=1;fontSize=10;fontColor=#475569;labelBackgroundColor=#ffffff;labelBorderColor=#cbd5e1;spacing=3;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" value="Deploys Static SPA" edge="1" source="inf_cr_be" target="inf_cr_fe">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_cr_vpc" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=1.8;strokeDashed=1;fontSize=10;fontColor=#475569;labelBackgroundColor=#ffffff;labelBorderColor=#cbd5e1;spacing=3;exitX=1;exitY=0.8;exitDx=0;exitDy=0;entryX=0;entryY=0.8;entryDx=0;entryDy=0;" value="Private Tunnel" edge="1" source="inf_cr_be" target="inf_vpc">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="950" y="975" />
+              <mxPoint x="1380" y="975" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_vpc_sql" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#475569;strokeWidth=1.8;strokeDashed=1;fontSize=10;fontColor=#475569;labelBackgroundColor=#ffffff;labelBorderColor=#cbd5e1;spacing=3;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" value="Internal VPC Subnet" edge="1" source="inf_vpc" target="inf_sql">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

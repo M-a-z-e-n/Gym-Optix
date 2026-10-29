@@ -1,0 +1,28 @@
+# User requested to ignore Old folders
+Old/
+**/Old/
+
+# Credentials and secrets
+kaggle.json
+*.env
+*.pem
+*.key
+
+# Draw.io temporary backup files
+.$*.bkp
+*.bkp
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+# Python cache & virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.venv/
+env/
+venv/
